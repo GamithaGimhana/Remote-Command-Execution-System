@@ -15,6 +15,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -98,16 +99,17 @@ public class ServerController implements Initializable {
                     for (ClientHandler client : clientList) {
 
                         if (client == this) {
+                            Date date = new Date();
                             if (finalMessage.equals("bye")) {
                                 client.sendMessage("Disconnected from server");
                                 clientList.remove(this);
                                 Platform.runLater(() -> txtChat.appendText("Client disconnected\n"));
                             } else if (finalMessage.equals("time")) {
-//                            client.sendMessage("Current server time -> " + "\n");
+                                client.sendMessage("Current server time -> " + date.getTime() + "\n");
                             } else if (finalMessage.equals("date")) {
-//                            client.sendMessage("Today's date -> " + "\n");
+                                client.sendMessage("Today's date -> " + date.getDate() + "\n");
                             } else if (finalMessage.equals("uptime")) {
-//                            client.sendMessage("Time since server started -> " + "\n");
+//                                client.sendMessage("Time since server started -> " + "\n");
                             }
                         } else if (client != this) {
                             client.sendMessage(finalMessage);
